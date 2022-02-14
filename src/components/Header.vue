@@ -27,7 +27,8 @@ export default {
    props: {},
    methods: {
       getSearch() {
-         this.$emit("query-search", this.searched);
+         this.$emit("query-search-movie", this.searched);
+         this.$emit("query-search-tv", this.searched);
          this.searched = "";
       },
    },
