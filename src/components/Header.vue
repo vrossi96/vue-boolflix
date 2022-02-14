@@ -1,12 +1,28 @@
 <template>
    <header id="header">
-      <div class="container">NAV</div>
+      <div class="container">
+         <div class="row">
+            <div class="col-12 d-flex justify-content-between align-items-center">
+               <a href="#">
+                  <img src="../assets/img/boolflix.png" alt="Boolflix" />
+               </a>
+               <div>
+                  <input type="text" v-model="searched" @keyup.enter="$emit('query-search', searched)" />
+               </div>
+            </div>
+         </div>
+      </div>
    </header>
 </template>
 
 <script>
 export default {
    name: "Header",
+   data() {
+      return {
+         searched: "",
+      };
+   },
    props: {},
 };
 </script>
@@ -14,7 +30,9 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 header {
-   height: 70px;
    background-color: #000;
+   img {
+      height: 70px;
+   }
 }
 </style>

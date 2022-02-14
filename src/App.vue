@@ -1,6 +1,6 @@
 <template>
    <div id="app">
-      <Header />
+      <Header @query-search="addQuerySearch" />
       <Main />
    </div>
 </template>
@@ -28,6 +28,10 @@ export default {
          axios.get("https://api.themoviedb.org/3/search/movie?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&query=batman&language=it-IT").then((res) => {
             this.movies = res.data.results;
          });
+      },
+
+      addQuerySearch(term) {
+         this.querySearch = term;
       },
    },
    mounted() {
