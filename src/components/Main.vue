@@ -7,7 +7,12 @@
             <ul>
                <li v-for="(movie, index) in movies" :key="movie.id || index">
                   Titolo: {{ movie.title }}, Titolo originale: {{ movie.original_title }}
-                  <img class="d-inline-block" :src="require(`../assets/img/${movie.original_language}.png`)" :alt="movie.original_language" />
+                  <img
+                     v-if="lang.includes(movie.original_language)"
+                     class="d-inline-block"
+                     :src="require(`../assets/img/${movie.original_language}.png`)"
+                     :alt="movie.original_language"
+                  />
                   Voto:
                   {{ movie.vote_average }}
                </li>
@@ -16,7 +21,12 @@
             <ul>
                <li v-for="(tv, index) in tvSeries" :key="tv.id || index">
                   Titolo: {{ tv.name }}, Titolo originale: {{ tv.original_name }}
-                  <img class="d-inline-block" :src="require(`../assets/img/${tv.original_language}.png`)" :alt="tv.original_language" />
+                  <img
+                     v-if="lang.includes(tv.original_language)"
+                     class="d-inline-block"
+                     :src="require(`../assets/img/${tv.original_language}.png`)"
+                     :alt="tv.original_language"
+                  />
                   Voto:
                   {{ tv.vote_average }}
                </li>
@@ -30,6 +40,11 @@
 export default {
    name: "Main",
    props: ["movies", "tvSeries"],
+   data() {
+      return {
+         lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi"],
+      };
+   },
 };
 </script>
 

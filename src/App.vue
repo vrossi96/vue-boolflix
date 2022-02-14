@@ -1,7 +1,7 @@
 <template>
    <div id="app">
       <Header @query-search-movie="getSearchedMovies" @query-search-tv="getSearchedTvShows" />
-      <Main :movies="moviesShown" :tv-series="tvShown" />
+      <Main :movies="movies" :tv-series="tvSeries" />
    </div>
 </template>
 
@@ -19,19 +19,11 @@ export default {
    },
    data() {
       return {
-         querySearch: "",
          movies: [],
          tvSeries: [],
       };
    },
-   computed: {
-      moviesShown() {
-         return this.movies;
-      },
-      tvShown() {
-         return this.tvSeries;
-      },
-   },
+   computed: {},
    methods: {
       getSearchedMovies(term) {
          axios.get(`https://api.themoviedb.org/3/search/movie?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&query=${term}&language=it-IT`).then((res) => {
