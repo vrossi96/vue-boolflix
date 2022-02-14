@@ -35,14 +35,8 @@ export default {
             this.tvSeries = res.data.results;
          });
       },
-
-      addQuerySearch(term) {
-         this.querySearch = term;
-      },
    },
-   mounted() {
-      // this.getSearchedMovies();
-   },
+   mounted() {},
 };
 </script>
 
@@ -51,7 +45,6 @@ export default {
 #app {
    font-family: Avenir, Helvetica, Arial, sans-serif;
    -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
    text-align: center;
 }
 </style>

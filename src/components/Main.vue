@@ -1,11 +1,13 @@
 <template>
    <main id="main-content">
-      <div class="container">
-         <h1 v-if="!movies.length && !tvSeries.length">CERCA UN FILM</h1>
+      <div class="container h-100">
+         <div v-if="!movies.length && !tvSeries.length" class="h-100 d-flex align-items-center justify-content-center">
+            <h1>CERCA UN FILM</h1>
+         </div>
          <div v-else>
             <h2>FILM</h2>
-            <ul>
-               <li v-for="(movie, index) in movies" :key="movie.id || index">
+            <ul class="row">
+               <li class="col-3" v-for="(movie, index) in movies" :key="movie.id || index">
                   Titolo: {{ movie.title }}, Titolo originale: {{ movie.original_title }}
                   <img
                      v-if="lang.includes(movie.original_language)"
@@ -18,8 +20,8 @@
                </li>
             </ul>
             <h2>SERIE</h2>
-            <ul>
-               <li v-for="(tv, index) in tvSeries" :key="tv.id || index">
+            <ul class="row">
+               <li class="col-3" v-for="(tv, index) in tvSeries" :key="tv.id || index">
                   Titolo: {{ tv.name }}, Titolo originale: {{ tv.original_name }}
                   <img
                      v-if="lang.includes(tv.original_language)"
@@ -42,7 +44,8 @@ export default {
    props: ["movies", "tvSeries"],
    data() {
       return {
-         lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi"],
+         cardBg: "https://image.tmdb.org/t/p/w342",
+         lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi", "ru"],
       };
    },
 };
@@ -56,6 +59,11 @@ main {
 
    ul {
       list-style: none;
+
+      li {
+         position: relative;
+         height: 88px;
+      }
    }
 
    img {
