@@ -7,7 +7,8 @@
                   <img src="../assets/img/boolflix.png" alt="Boolflix" />
                </a>
                <div>
-                  <input type="text" v-model="searched" @keyup.enter="$emit('query-search', searched)" />
+                  <input type="text" v-model="searched" @keyup.enter="getSearch" />
+                  <button @click="getSearch">Cerca</button>
                </div>
             </div>
          </div>
@@ -24,6 +25,12 @@ export default {
       };
    },
    props: {},
+   methods: {
+      getSearch() {
+         this.$emit("query-search", this.searched);
+         this.searched = "";
+      },
+   },
 };
 </script>
 

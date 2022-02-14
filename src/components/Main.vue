@@ -1,13 +1,14 @@
 <template>
    <main id="main-content">
-      <ul>
-         <li>
-            {{ movies[0].title }}
-            {{ movies[0].original_title }}
-            {{ movies[0].original_language }}
-            {{ movies[0].vote_average }}
-         </li>
-      </ul>
+      <div class="container">
+         <h1 v-if="!movies.length">CERCA UN FILM</h1>
+         <ul v-else>
+            <li v-for="(movie, index) in movies" :key="movie.id || index">
+               Titolo: {{ movie.title }}, Titolo originale: {{ movie.original_title }} Lingua: {{ movie.original_language }} Voto:
+               {{ movie.vote_average }}
+            </li>
+         </ul>
+      </div>
    </main>
 </template>
 
