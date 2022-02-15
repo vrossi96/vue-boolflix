@@ -24,12 +24,10 @@
                <i class="far fa-star"></i>
                <i class="far fa-star"></i>
                <!-- RATING -->
-               <div>{{ rating }}</div>
-               <!-- <div class="rating">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-               </div> -->
+               <!-- <div class="rating">{{ rating }}</div> -->
+               <div class="rating">
+                  <i v-for="n in rating(item.vote_average)" :key="n" class="fas fa-star"></i>
+               </div>
             </div>
          </div>
       </div>
@@ -48,16 +46,9 @@ export default {
       };
    },
    methods: {
-      rating() {
-         const rating = this.item.vote_average.ceil();
-         const star = document.createElement("i");
-         star.className = `fas fa-star`;
-         const starContainer = document.createElement("div");
-         starContainer.className = `rating`;
-         for (let i = 0; i <= rating; i++) {
-            starContainer.appendChild(star);
-         }
-         return starContainer;
+      rating(n) {
+         const rating = Math.ceil(n) / 2;
+         return rating;
       },
    },
 };
