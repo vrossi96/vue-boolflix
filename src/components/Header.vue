@@ -6,9 +6,9 @@
                <a href="#">
                   <img src="../assets/img/boolflix.png" alt="Boolflix" />
                </a>
-               <div>
+               <div class="input-box">
                   <input type="text" v-model="searched" @keyup.enter="getSearch" placeholder="Cerca un film o serie..." />
-                  <button @click="getSearch">Cerca</button>
+                  <button @click="getSearch"><i class="fas fa-search"></i></button>
                </div>
             </div>
          </div>
@@ -27,8 +27,7 @@ export default {
    props: [],
    methods: {
       getSearch() {
-         this.$emit("query-search-movie", this.searched);
-         this.$emit("query-search-tv", this.searched);
+         this.$emit("query-search", this.searched);
          this.searched = "";
       },
    },
@@ -41,6 +40,18 @@ header {
    background-color: #000;
    img {
       height: 70px;
+   }
+
+   .input-box {
+      :first-child {
+         border-radius: 5px 0 0 5px;
+         border: 2px solid #dc1a28;
+      }
+      :last-child {
+         border-radius: 0 5px 5px 0;
+         border: 2px solid #dc1a28;
+         background-color: #dc1a28;
+      }
    }
 }
 </style>
