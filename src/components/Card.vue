@@ -42,6 +42,7 @@
                   <i v-for="n in rating(item.vote_average)" :key="n" class="fas fa-star"></i>
                </div>
             </div>
+            <span> ({{ rating(item.vote_average) }}/5) </span>
          </div>
       </div>
    </div>
@@ -60,7 +61,8 @@ export default {
    },
    methods: {
       rating(n) {
-         const rating = Math.ceil(n) / 2;
+         //# con: const rating = Math.ceil(n) /2; mostra meno carte in pagina rispetto il loro array
+         const rating = Math.ceil(n / 2);
          return rating;
       },
    },

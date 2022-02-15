@@ -7,7 +7,7 @@
                   <img src="../assets/img/boolflix.png" alt="Boolflix" />
                </a>
                <div class="input-box">
-                  <input type="text" v-model="searched" @keyup.enter="getSearch" placeholder="Cerca un film o serie..." />
+                  <input type="text" v-model.trim="searched" @keyup.enter="getSearch" placeholder="Cerca un film o serie..." />
                   <button @click="getSearch"><i class="fas fa-search"></i></button>
                </div>
             </div>
