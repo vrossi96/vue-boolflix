@@ -86,6 +86,7 @@ export default {
    position: relative;
    height: 400px;
    transition: all 0.3s 0s ease-out;
+   cursor: pointer;
    &:hover {
       transform: scale(1.05);
       .info {
