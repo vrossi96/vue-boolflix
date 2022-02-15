@@ -8,25 +8,28 @@
       <div class="info">
          <!-- TITLE -->
          <div class="py-3">
-            <p class="fw-bold m-0">Titolo:</p>
+            <span class="fw-bold">Titolo:</span>
             {{ item.title || item.name }}
          </div>
          <!-- ORIGINAL TITLE -->
          <div class="py-3">
-            <p class="fw-bold m-0">Titolo originale:</p>
+            <span class="fw-bold">Titolo originale:</span>
             {{ item.original_title || item.original_name }}
          </div>
          <!-- LANGUAGE -->
-         <img
-            v-if="lang.includes(item.original_language)"
-            class="d-inline-block flag"
-            :src="require(`../assets/img/flags/${item.original_language}.png`)"
-            :alt="item.original_language"
-         />
-         <p v-else>{{ item.original_language }}</p>
+         <div class="py-3">
+            <span class="fw-bold">Lingua: </span>
+            <img
+               v-if="lang.includes(item.original_language)"
+               class="d-inline-block flag"
+               :src="require(`../assets/img/flags/${item.original_language}.png`)"
+               :alt="item.original_language"
+            />
+            <p v-else>{{ item.original_language }}</p>
+         </div>
          <!-- RATING -->
-         <div>
-            <p>Voto:</p>
+         <div class="py-3">
+            <span class="fw-bold">Voto: </span>
             <div class="star-rating">
                <i class="far fa-star"></i>
                <i class="far fa-star"></i>
@@ -51,7 +54,7 @@ export default {
    data() {
       return {
          cardBg: "https://image.tmdb.org/t/p/w342",
-         lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi", "ru"],
+         lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi", "ru", "ar"],
          stockImg: "https://i.pinimg.com/originals/c3/c7/d5/c3c7d5d3c5090645d0bc9a44b83c2d40.jpg",
       };
    },
@@ -77,19 +80,22 @@ export default {
       }
    }
    .poster {
+      border: 1px solid white;
       height: 100%;
       width: 100%;
    }
    .info {
+      border: 1px solid white;
       display: none;
       background-color: rgba(0, 0, 0, 0.75);
       height: 100%;
+      text-align: start;
+      padding: 10px;
    }
    .flag {
       height: 20px;
       width: 30px;
       border-radius: 5px;
-      margin-bottom: 16px;
    }
    //# RATINGS
    .star-rating {
