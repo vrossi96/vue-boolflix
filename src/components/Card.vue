@@ -1,20 +1,37 @@
 <template>
    <div class="item-card col-3">
+      <!-- IMG BG -->
       <img v-if="item.poster_path" class="poster" :src="cardBg + item.poster_path" alt="" />
       <img v-else class="poster" :src="stockImg" alt="" />
+
+      <!-- INFO CARD with Hover -->
       <div class="info">
          <p>Titolo: {{ item.title || item.name }}</p>
          <p>Titolo originale: {{ item.original_title || item.original_name }}</p>
-         <p>
-            Paese d'origine:
-            <img
-               v-if="lang.includes(item.original_language)"
-               class="d-inline-block flag"
-               :src="require(`../assets/img/${item.original_language}.png`)"
-               :alt="item.original_language"
-            />
-         </p>
-         <p>Voto: {{ item.vote_average }}</p>
+         <img
+            v-if="lang.includes(item.original_language)"
+            class="d-inline-block flag"
+            :src="require(`../assets/img/${item.original_language}.png`)"
+            :alt="item.original_language"
+         />
+         <p v-else>{{ item.original_language }}</p>
+         <div>
+            <p>Voto: {{ item.vote_average }} <i class="far fa-star"></i> <i class="fas fa-star"></i></p>
+            <div class="star-rating">
+               <i class="far fa-star"></i>
+               <i class="far fa-star"></i>
+               <i class="far fa-star"></i>
+               <i class="far fa-star"></i>
+               <i class="far fa-star"></i>
+               <!-- RATING -->
+               <div>{{ rating }}</div>
+               <!-- <div class="rating">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+               </div> -->
+            </div>
+         </div>
       </div>
    </div>
 </template>
@@ -29,6 +46,19 @@ export default {
          lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi", "ru"],
          stockImg: "https://i.pinimg.com/originals/c3/c7/d5/c3c7d5d3c5090645d0bc9a44b83c2d40.jpg",
       };
+   },
+   methods: {
+      rating() {
+         const rating = this.item.vote_average.ceil();
+         const star = document.createElement("i");
+         star.className = `fas fa-star`;
+         const starContainer = document.createElement("div");
+         starContainer.className = `rating`;
+         for (let i = 0; i <= rating; i++) {
+            starContainer.appendChild(star);
+         }
+         return starContainer;
+      },
    },
 };
 </script>
@@ -55,9 +85,23 @@ export default {
       height: 100%;
    }
    .flag {
-      height: 15px;
-      width: 25px;
-      border-radius: 2px;
+      height: 20px;
+      width: 30px;
+      border-radius: 5px;
+      margin-bottom: 16px;
+   }
+   //# RATINGS
+   .star-rating {
+      position: relative;
+      display: inline-block;
+      .fa-star {
+         font-size: 25px;
+      }
+      .rating {
+         position: absolute;
+         top: 0;
+         left: 0;
+      }
    }
 }
 </style>
