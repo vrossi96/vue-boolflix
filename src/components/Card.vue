@@ -6,8 +6,17 @@
 
       <!-- INFO CARD with Hover -->
       <div class="info">
-         <p>Titolo: {{ item.title || item.name }}</p>
-         <p>Titolo originale: {{ item.original_title || item.original_name }}</p>
+         <!-- TITLE -->
+         <div class="py-3">
+            <p class="fw-bold m-0">Titolo:</p>
+            {{ item.title || item.name }}
+         </div>
+         <!-- ORIGINAL TITLE -->
+         <div class="py-3">
+            <p class="fw-bold m-0">Titolo originale:</p>
+            {{ item.original_title || item.original_name }}
+         </div>
+         <!-- LANGUAGE -->
          <img
             v-if="lang.includes(item.original_language)"
             class="d-inline-block flag"
@@ -15,6 +24,7 @@
             :alt="item.original_language"
          />
          <p v-else>{{ item.original_language }}</p>
+         <!-- RATING -->
          <div>
             <p>Voto:</p>
             <div class="star-rating">
@@ -92,6 +102,9 @@ export default {
          position: absolute;
          top: 0;
          left: 0;
+         & > * {
+            color: rgb(184, 184, 0);
+         }
       }
    }
 }
