@@ -12,7 +12,7 @@
             {{ item.title || item.name }}
          </div>
          <!-- ORIGINAL TITLE -->
-         <div class="py-3">
+         <div class="py-3" v-if="checkTitle(item)">
             <span class="fw-bold">Titolo originale:</span>
             {{ item.original_title || item.original_name }}
          </div>
@@ -44,6 +44,11 @@
             </div>
             <span> ({{ rating(item.vote_average) }}/5) </span>
          </div>
+         <!-- DESCRIPTION -->
+         <div v-if="item.overview" class="py-3">
+            <p class="fw-bold p-0">Descrizione:</p>
+            <span>{{ item.overview }}</span>
+         </div>
       </div>
    </div>
 </template>
@@ -55,15 +60,22 @@ export default {
    data() {
       return {
          cardBg: "https://image.tmdb.org/t/p/w342",
-         lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi", "ru", "ar"],
+         lang: ["it", "en", "ja", "de", "es", "pt", "fr", "ko", "cs", "pl", "hi", "ru", "ar", "da", "fi", "vi", "nl"],
          stockImg: "https://i.pinimg.com/originals/c3/c7/d5/c3c7d5d3c5090645d0bc9a44b83c2d40.jpg",
       };
    },
    methods: {
+      //* Preso il rating, diviso per 2 e semplificato per eccesso
       rating(n) {
          //# con: const rating = Math.ceil(n) /2; mostra meno carte in pagina rispetto il loro array
          const rating = Math.ceil(n / 2);
          return rating;
+      },
+      //* Controllo del titolo se ripetuto nel titolo originale
+      checkTitle(title) {
+         if (title.original_title != title.title || title.original_name != title.name) {
+            return true;
+         }
       },
    },
 };
@@ -73,7 +85,9 @@ export default {
 .item-card {
    position: relative;
    height: 400px;
+   transition: all 0.3s 0s ease-out;
    &:hover {
+      transform: scale(1.05);
       .info {
          display: block;
       }
@@ -93,6 +107,7 @@ export default {
       height: 100%;
       text-align: start;
       padding: 10px;
+      overflow-y: auto;
    }
    .flag {
       height: 20px;
