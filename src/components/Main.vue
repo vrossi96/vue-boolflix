@@ -2,15 +2,15 @@
    <main id="main-content">
       <div class="container h-100">
          <div v-if="!movies.length && !tvSeries.length" class="h-100 d-flex align-items-center justify-content-center">
-            <h1>CERCA UN FILM</h1>
+            <h1 class="text-uppercase">CERCA UN FILM o una serie TV!</h1>
          </div>
          <div v-else>
-            <h2 class="py-3">FILM</h2>
+            <img class="pb-3 pt-5 img-title" src="../assets/img/film-title.png" alt="Film" />
             <div class="category row g-3">
                <!-- CARDS FOR MOVIES -->
                <Card v-for="(movie, index) in movies" :key="movie.id || index" :item="movie" />
             </div>
-            <h2 class="py-3">SERIE</h2>
+            <img class="pb-3 pt-5 img-title" src="../assets/img/serie-title.png" alt="Serie TV" />
             <div class="category row g-3">
                <!-- CARDS FOR TV SERIES -->
                <Card v-for="(serie, index) in tvSeries" :key="serie.id || index" :item="serie" />
@@ -40,11 +40,16 @@ main {
    background-color: #434343;
    overflow-y: scroll;
 
+   .img-title {
+      height: 180px;
+   }
+
    .col-3 {
       overflow-x: hidden;
    }
    .category {
       list-style: none;
+      padding-bottom: 50px;
    }
 }
 </style>

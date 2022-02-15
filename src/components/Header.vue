@@ -7,7 +7,7 @@
                   <img src="../assets/img/boolflix.png" alt="Boolflix" />
                </a>
                <div>
-                  <input type="text" v-model="searched" @keyup.enter="getSearch" />
+                  <input type="text" v-model="searched" @keyup.enter="getSearch" placeholder="Cerca un film o serie..." />
                   <button @click="getSearch">Cerca</button>
                </div>
             </div>
@@ -24,7 +24,7 @@ export default {
          searched: "",
       };
    },
-   props: {},
+   props: [],
    methods: {
       getSearch() {
          this.$emit("query-search-movie", this.searched);

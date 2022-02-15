@@ -11,12 +11,12 @@
          <img
             v-if="lang.includes(item.original_language)"
             class="d-inline-block flag"
-            :src="require(`../assets/img/${item.original_language}.png`)"
+            :src="require(`../assets/img/flags/${item.original_language}.png`)"
             :alt="item.original_language"
          />
          <p v-else>{{ item.original_language }}</p>
          <div>
-            <p>Voto: {{ item.vote_average }} <i class="far fa-star"></i> <i class="fas fa-star"></i></p>
+            <p>Voto:</p>
             <div class="star-rating">
                <i class="far fa-star"></i>
                <i class="far fa-star"></i>
