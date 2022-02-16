@@ -39,10 +39,10 @@
                <!-- RATING -->
                <!-- <div class="rating">{{ rating }}</div> -->
                <div class="rating">
-                  <i v-for="n in rating(item.vote_average)" :key="n" class="fas fa-star"></i>
+                  <i v-for="n in rating" :key="n" class="fas fa-star"></i>
                </div>
             </div>
-            <span> ({{ rating(item.vote_average) }}/5) </span>
+            <span> ({{ rating }}/5) </span>
          </div>
          <!-- DESCRIPTION -->
          <div v-if="item.overview" class="py-3">
@@ -64,13 +64,13 @@ export default {
          stockImg: "https://i.pinimg.com/originals/c3/c7/d5/c3c7d5d3c5090645d0bc9a44b83c2d40.jpg",
       };
    },
-   methods: {
+   computed: {
       //* Preso il rating, diviso per 2 e semplificato per eccesso
-      rating(n) {
-         //# con: const rating = Math.ceil(n) /2; mostra meno carte in pagina rispetto il loro array
-         const rating = Math.ceil(n / 2);
-         return rating;
+      rating() {
+         return Math.ceil(this.item.vote_average / 2);
       },
+   },
+   methods: {
       //* Controllo del titolo se ripetuto nel titolo originale
       checkTitle(title) {
          if (title.original_title != title.title || title.original_name != title.name) {
