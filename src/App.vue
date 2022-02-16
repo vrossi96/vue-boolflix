@@ -19,6 +19,7 @@ export default {
    },
    data() {
       return {
+         genres: [],
          movie: {
             movies: [],
             moviesId: [],
@@ -68,6 +69,20 @@ export default {
                });
                this.tv.tvCast.push(cast);
             });
+         });
+      },
+
+      /* getMovieGenres() {
+         return this.movie.movieGenres.forEach((item) => {
+            this.genres.push(item);
+         });
+      }, */
+
+      mergeGenres() {
+         return this.tv.tvGenres.forEach((item) => {
+            if (!this.movie.movieGenres.includes(item.id)) {
+               this.movie.movieGenres.push(item);
+            }
          });
       },
    },
