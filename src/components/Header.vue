@@ -7,6 +7,10 @@
                   <img src="../assets/img/boolflix.png" alt="Boolflix" />
                </a>
                <div class="input-box">
+                  <select name="" id="">
+                     <option value="">Generi</option>
+                     <option v-for="g in genres" :key="g.id" :value="g.id">{{ g.name }}</option>
+                  </select>
                   <input type="text" v-model.trim="searched" @keyup.enter="getSearch" placeholder="Cerca un film o serie..." />
                   <button @click="getSearch"><i class="fas fa-search"></i></button>
                </div>
@@ -24,7 +28,7 @@ export default {
          searched: "",
       };
    },
-   props: [],
+   props: ["genres"],
    methods: {
       getSearch() {
          this.$emit("query-search", this.searched);
@@ -43,13 +47,15 @@ header {
    }
 
    .input-box {
-      :first-child {
-         border-radius: 5px 0 0 5px;
+      > * {
+         height: 30px;
          border: 2px solid #dc1a28;
       }
-      :last-child {
+      > :first-child {
+         border-radius: 5px 0 0 5px;
+      }
+      > :last-child {
          border-radius: 0 5px 5px 0;
-         border: 2px solid #dc1a28;
          background-color: #dc1a28;
       }
    }

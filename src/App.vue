@@ -1,6 +1,6 @@
 <template>
    <div id="app">
-      <Header @query-search="getResultsSearch" />
+      <Header @query-search="getResultsSearch" :genres="movie.movieGenres" />
       <Main :movies="movie.movies" :tv-series="tv.tvSeries" :movie-cast="movie.movieCast" :tv-cast="tv.tvCast" />
    </div>
 </template>
@@ -72,16 +72,16 @@ export default {
          });
       },
 
-      /* getMovieGenres() {
-         return this.movie.movieGenres.forEach((item) => {
-            this.genres.push(item);
-         });
-      }, */
-
       mergeGenres() {
-         return this.tv.tvGenres.forEach((item) => {
-            if (!this.movie.movieGenres.includes(item.id)) {
-               this.movie.movieGenres.push(item);
+         return this.tv.tvGenres.forEach((tvItem) => {
+            const duplicatedGenre = this.movie.movieGenres.filter((movieItem) => {
+               if (tvItem.id === movieItem.id) {
+                  return true;
+               } else return false;
+            });
+
+            if (duplicatedGenre.length === 0) {
+               this.movie.movieGenres.push(tvItem);
             }
          });
       },
