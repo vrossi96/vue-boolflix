@@ -1,7 +1,7 @@
 <template>
    <main id="main-content">
       <div class="container h-100">
-         <div v-if="!movies.length && !tvSeries.length" class="h-100 d-flex align-items-center justify-content-center">
+         <div v-if="!movieCast.length && !tvCast.length" class="h-100 d-flex align-items-center justify-content-center">
             <h1 class="text-uppercase">CERCA UN FILM o una serie TV!</h1>
          </div>
          <div v-else>

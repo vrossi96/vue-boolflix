@@ -45,7 +45,7 @@
             <span> ({{ rating }}/5) </span>
          </div>
          <!-- CAST -->
-         <div class="py-3">
+         <div v-if="cast.length" class="py-3">
             <span class="fw-bold">Cast: </span>
             <p class="m-0" v-for="actor in cast" :key="actor.name">{{ actor.name }}</p>
          </div>
