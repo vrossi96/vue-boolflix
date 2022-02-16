@@ -1,7 +1,7 @@
 <template>
    <div id="app">
       <Header @query-search="getResultsSearch" />
-      <Main :movies="movies" :tv-series="tvSeries" />
+      <Main :movies="movie.movies" :tv-series="tv.tvSeries" />
    </div>
 </template>
 
@@ -19,12 +19,16 @@ export default {
    },
    data() {
       return {
-         movies: [],
-         moviesId: [],
-         movieCast: [],
-         tvSeries: [],
-         tvId: [],
-         tvCast: [],
+         movie: {
+            movies: [],
+            moviesId: [],
+            movieCast: [],
+         },
+         tv: {
+            tvSeries: [],
+            tvId: [],
+            tvCast: [],
+         },
          api: {
             baseUri: "https://api.themoviedb.org/3",
             apiKey: "e03c5cb8dddd1d7d20fb6adf3922071d",
@@ -34,27 +38,27 @@ export default {
    },
    computed: {
       getMoviesId() {
-         return this.movies.forEach((item) => {
-            this.moviesId.push(item.id);
+         return this.movie.movies.forEach((item) => {
+            this.movie.moviesId.push(item.id);
          });
       },
       getTvId() {
-         return this.tvSeries.forEach((item) => {
-            this.tvId.push(item.id);
+         return this.tv.tvSeries.forEach((item) => {
+            this.tv.tvId.push(item.id);
          });
       },
 
       getMovieCast() {
-         return this.moviesId.forEach((id) => {
+         return this.movie.moviesId.forEach((id) => {
             axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&language=it-IT`).then((res) => {
-               this.movieCast.push(res.data.cast);
+               this.movie.movieCast.push(res.data.cast);
             });
          });
       },
       getTvCast() {
-         return this.tvId.forEach((id) => {
+         return this.tv.tvId.forEach((id) => {
             axios.get(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&language=it-IT`).then((res) => {
-               this.tvCast.push(res.data.cast);
+               this.tv.tvCast.push(res.data.cast);
             });
          });
       },
@@ -62,8 +66,8 @@ export default {
    methods: {
       getResultsSearch(term) {
          if (!term) {
-            this.movies = [];
-            this.tvSeries = [];
+            this.movie.movies = [];
+            this.tv.tvSeries = [];
             return;
          }
          const config = {
@@ -73,18 +77,18 @@ export default {
                query: term,
             },
          };
-         this.moviesId = [];
-         this.movieCast = [];
-         this.tvId = [];
-         this.tvCast = [];
+         this.movie.moviesId = [];
+         this.movie.movieCast = [];
+         this.tv.tvId = [];
+         this.tv.tvCast = [];
 
-         this.callApi("/search/movie", config, "movies");
-         this.callApi("/search/tv", config, "tvSeries");
+         this.callApi("/search/movie", config, "movie", "movies");
+         this.callApi("/search/tv", config, "tv", "tvSeries");
       },
 
-      callApi(endpoint, config, array) {
+      callApi(endpoint, config, arrayObject, array) {
          axios.get(`${this.api.baseUri}${endpoint}`, config).then((res) => {
-            this[array] = res.data.results;
+            this[arrayObject][array] = res.data.results;
          });
       },
       // https://api.themoviedb.org/3/movie/49397/credits?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&language=it-IT
