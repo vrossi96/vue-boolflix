@@ -23,11 +23,13 @@ export default {
             movies: [],
             moviesId: [],
             movieCast: [],
+            movieGenres: [],
          },
          tv: {
             tvSeries: [],
             tvId: [],
             tvCast: [],
+            tvGenres: [],
          },
          api: {
             baseUri: "https://api.themoviedb.org/3",
@@ -83,23 +85,37 @@ export default {
                query: term,
             },
          };
+         //# EMPTY CAST AND IDs
          this.movie.moviesId = [];
          this.movie.movieCast = [];
          this.tv.tvId = [];
          this.tv.tvCast = [];
 
-         this.callApi("/search/movie", config, "movie", "movies");
-         this.callApi("/search/tv", config, "tv", "tvSeries");
+         //# GET LIST OF MOVIES AND TV SHOWS
+         this.callApi("/search/movie", config, "movie", "movies", "results");
+         this.callApi("/search/tv", config, "tv", "tvSeries", "results");
+      },
+      getGenres() {
+         const config = {
+            params: {
+               language: this.api.language,
+               api_key: this.api.apiKey,
+            },
+         };
+         //# GET LIST OF GENRES FOR MOVIES AND TV SHOWS
+         this.callApi("/genre/movie/list", config, "movie", "movieGenres", "genres");
+         this.callApi("/genre/tv/list", config, "tv", "tvGenres", "genres");
       },
 
-      callApi(endpoint, config, arrayObject, array) {
+      callApi(endpoint, config, arrayObject, array, dataName) {
          axios.get(`${this.api.baseUri}${endpoint}`, config).then((res) => {
-            this[arrayObject][array] = res.data.results;
+            this[arrayObject][array] = res.data[dataName];
          });
       },
-      // https://api.themoviedb.org/3/movie/49397/credits?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&language=it-IT
    },
-   mounted() {},
+   mounted() {
+      this.getGenres();
+   },
 };
 </script>
 
