@@ -44,6 +44,11 @@
             </div>
             <span> ({{ rating }}/5) </span>
          </div>
+         <!-- CAST -->
+         <div class="py-3">
+            <span class="fw-bold">Cast: </span>
+            <p class="m-0" v-for="actor in cast" :key="actor.name">{{ actor.name }}</p>
+         </div>
          <!-- DESCRIPTION -->
          <div v-if="item.overview" class="py-3">
             <p class="fw-bold p-0">Descrizione:</p>
@@ -56,7 +61,7 @@
 <script>
 export default {
    name: "Card",
-   props: ["item"],
+   props: ["item", "cast"],
    data() {
       return {
          cardBg: "https://image.tmdb.org/t/p/w342",
