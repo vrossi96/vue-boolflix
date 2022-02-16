@@ -45,10 +45,17 @@
             <span> ({{ rating }}/5) </span>
          </div>
          <!-- CAST -->
+         <!-- //TODO fix error length -->
          <div v-if="cast.length" class="py-3">
             <span class="fw-bold">Cast: </span>
             <p class="m-0" v-for="actor in cast" :key="actor.name">{{ actor.name }}</p>
          </div>
+         <!-- GENRES -->
+         <!-- //TODO fix -->
+         <!-- <div v-if="item.genre_ids.length" class="py-3">
+            <span class="fw-bold">Genere: </span>
+            <p v-for="genreNumber in item.genre_ids" :key="genreNumber">{{ getGenre(genreNumber) }}</p>
+         </div> -->
          <!-- DESCRIPTION -->
          <div v-if="item.overview" class="py-3">
             <p class="fw-bold p-0">Descrizione:</p>
@@ -61,7 +68,7 @@
 <script>
 export default {
    name: "Card",
-   props: ["item", "cast"],
+   props: ["item", "cast", "genres"],
    data() {
       return {
          cardBg: "https://image.tmdb.org/t/p/w342",
@@ -81,6 +88,14 @@ export default {
          if (title.original_title != title.title || title.original_name != title.name) {
             return true;
          }
+      },
+      getGenre(genre) {
+         this.genres.forEach((g) => {
+            if (g.id === genre) {
+               console.log(g.name);
+               return g.name;
+            }
+         });
       },
    },
 };

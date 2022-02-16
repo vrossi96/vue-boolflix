@@ -1,7 +1,7 @@
 <template>
    <div id="app">
       <Header @query-search="getResultsSearch" :genres="movie.movieGenres" />
-      <Main :movies="movie.movies" :tv-series="tv.tvSeries" :movie-cast="movie.movieCast" :tv-cast="tv.tvCast" />
+      <Main :movies="movie.movies" :tv-series="tv.tvSeries" :movie-cast="movie.movieCast" :tv-cast="tv.tvCast" :genres="movie.movieGenres" />
    </div>
 </template>
 
