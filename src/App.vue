@@ -51,14 +51,20 @@ export default {
       getMovieCast() {
          return this.movie.moviesId.forEach((id) => {
             axios.get(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&language=it-IT`).then((res) => {
-               this.movie.movieCast.push(res.data.cast);
+               const cast = res.data.cast.filter((actor, index) => {
+                  if (index < 5) return true;
+               });
+               this.movie.movieCast.push(cast);
             });
          });
       },
       getTvCast() {
          return this.tv.tvId.forEach((id) => {
             axios.get(`https://api.themoviedb.org/3/tv/${id}/credits?api_key=e03c5cb8dddd1d7d20fb6adf3922071d&language=it-IT`).then((res) => {
-               this.tv.tvCast.push(res.data.cast);
+               const cast = res.data.cast.filter((actor, index) => {
+                  if (index < 5) return true;
+               });
+               this.tv.tvCast.push(cast);
             });
          });
       },
