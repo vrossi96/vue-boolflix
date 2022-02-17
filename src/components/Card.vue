@@ -91,8 +91,7 @@ export default {
       },
       getGenre(genre) {
          this.genres.forEach((g) => {
-            if (g.id === genre) {
-               console.log(g.name);
+            if (g.id == genre) {
                return g.name;
             }
          });
@@ -111,9 +110,9 @@ export default {
       transform: scale(1.05);
       .info {
          display: block;
-      }
-      .poster {
-         display: none;
+         position: absolute;
+         width: 94.5%;
+         top: 0;
       }
    }
    .poster {
@@ -124,7 +123,7 @@ export default {
    .info {
       border: 1px solid white;
       display: none;
-      background-color: rgba(0, 0, 0, 0.75);
+      background-color: rgba(0, 0, 0, 0.8);
       height: 100%;
       text-align: start;
       padding: 10px;
